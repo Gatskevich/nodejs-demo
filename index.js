@@ -1,4 +1,5 @@
 import express from 'express';
+import { userRouter } from './users/users.js'
 
 const port = 8000;
 const app = express();
@@ -8,18 +9,7 @@ app.all('/hello', (req, res, next) => {
 	next();
 });
 
-const cb = (req, res, next) => {
-	console.log('CB');
-	next();
-}
-
-app.route('/user')
-	.get('/hello', (req, res) => {
-		res.send('Hi GET!');
-	})
-	.post('/hello', (req, res) => {
-		res.send('Hi Post!');
-	});
+app.use('/users', userRouter);
 
 app.listen(port, () => {
     console.log(`Server run on http://localhost:${port}`);
