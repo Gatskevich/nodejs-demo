@@ -1,6 +1,9 @@
+import { injectable } from 'inversify';
 import { Logger, ISettingsParam } from 'tslog';
+import { ILogger } from './logger.interface';
 
-export class LoggerService {
+@injectable()
+export class LoggerService implements ILogger {
 	public logger: Logger<unknown>;
 
 	constructor() {
@@ -8,19 +11,19 @@ export class LoggerService {
 			displayInstanceName: false,
 			displayLoggerName: false,
 			displayFilePath: 'hidden',
-			displayFunctionName: false
+			displayFunctionName: false,
 		} as ISettingsParam<unknown>);
 	}
 
-	log(...args: unknown[]) {
+	log(...args: unknown[]): void {
 		this.logger.info(...args);
 	}
 
-	error(...args: unknown[]) {
+	error(...args: unknown[]): void {
 		this.logger.error(...args);
 	}
 
-	warn(...args: unknown[]) {
+	warn(...args: unknown[]): void {
 		this.logger.warn(...args);
 	}
 }
