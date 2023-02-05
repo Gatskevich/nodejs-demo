@@ -31,7 +31,7 @@ export class UserController extends BaseController implements IUserController {
 			{
 				path: '/login',
 				func: this.login,
-				method: 'get',
+				method: 'post',
 				middlewares: [new ValidateMiddleware(UserLoginDto)],
 			},
 			{
